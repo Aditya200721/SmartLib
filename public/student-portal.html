@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b5d">
+  <title>Student Dashboard | SMART LIB</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/student-dashboard.css">
+
+  <script src="/js/student-dashboard.js" defer></script>
+</head>
+
+<body class="student-dashboard">
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+
+      <div class="sidebar-brand">
+        <a href="/" class="dashboard-logo">
+          <i class="fas fa-book-open"></i>
+          <span>SMART <strong>LIB</strong></span>
+        </a>
+
+        <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle sidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-menu">
+
+        <p class="sidebar-label">MAIN MENU</p>
+
+        <button class="dashboard-nav-btn active" data-section="dashboardSection">
+          <i class="fas fa-th-large"></i>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="dashboard-nav-btn" data-section="booksSection">
+          <i class="fas fa-book"></i>
+          <span>Browse Books</span>
+        </button>
+
+        <button class="dashboard-nav-btn" data-section="requestsSection">
+          <i class="fas fa-clipboard-list"></i>
+          <span>My Requests</span>
+        </button>
+
+        <button class="dashboard-nav-btn" data-section="loansSection">
+          <i class="fas fa-bookmark"></i>
+          <span>My Loans</span>
+        </button>
+
+        <p class="sidebar-label">DISCOVER</p>
+
+        <button class="dashboard-nav-btn" data-section="recommendationsSection">
+          <i class="fas fa-wand-magic-sparkles"></i>
+          <span>Recommendations</span>
+        </button>
+
+        <button class="dashboard-nav-btn" data-section="graphRecommendationsSection">
+          <i class="fas fa-diagram-project"></i>
+          <span>Graph Recommendations</span>
+        </button>
+
+        <p class="sidebar-label">ACCOUNT</p>
+
+        <button class="dashboard-nav-btn" data-section="profileSection">
+          <i class="fas fa-user"></i>
+          <span>My Profile</span>
+        </button>
+
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="logout-button" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+      <!-- TOPBAR -->
+      <header class="dashboard-topbar">
+
+        <div class="topbar-left">
+          <span class="topbar-title">Student Portal</span>
+        </div>
+
+        <div class="dashboard-header-actions">
+          <label class="theme-control">
+            <i class="fas fa-palette"></i>
+            <select id="themeSelect" aria-label="Choose theme">
+              <option value="ocean">Ocean Light</option>
+              <option value="emerald">Emerald Dark</option>
+              <option value="dark">Midnight Black</option>
+            </select>
+          </label>
+        </div>
+
+      </header>
+
+      <div class="dashboard-container">
+
+        <!-- DASHBOARD OVERVIEW -->
+        <section class="dashboard-panel active" id="dashboardSection">
+
+          <section class="welcome-section">
+            <div>
+              <p class="dashboard-eyebrow">STUDENT PORTAL</p>
+              <h1>Welcome, <span id="studentName">Student</span>!</h1>
+              <p>Manage your books, borrowing requests and library activity.</p>
+            </div>
+
+            <div class="welcome-icon">
+              <i class="fas fa-book-reader"></i>
+            </div>
+          </section>
+
+          <!-- STATISTICS -->
+          <section class="stats-grid" aria-label="Library statistics">
+
+            <article class="stat-card">
+              <div class="stat-icon blue">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <div>
+                <p>Total Requests</p>
+                <h2 id="totalRequests">0</h2>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon orange">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <p>Pending Requests</p>
+                <h2 id="pendingRequests">0</h2>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon green">
+                <i class="fas fa-book"></i>
+              </div>
+              <div>
+                <p>Active Loans</p>
+                <h2 id="activeLoans">0</h2>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon purple">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <p>Returned Books</p>
+                <h2 id="returnedBooks">0</h2>
+              </div>
+            </article>
+
+          </section>
+
+        </section>
+
+        <!-- BROWSE BOOKS -->
+        <section class="dashboard-panel" id="booksSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>Explore Books</h2>
+              <p>Find books available in your library.</p>
+            </div>
+            <span class="panel-count" id="bookCount">0 books</span>
+          </div>
+
+          <div class="book-filters">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="search" id="bookSearch"
+                placeholder="Search title, author or ISBN...">
+            </div>
+
+            <select id="categoryFilter" aria-label="Filter by category">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+
+          <div class="book-grid" id="bookGrid">
+            <p class="loading-message">Loading books...</p>
+          </div>
+
+          <div class="pagination" id="pagination"></div>
+
+        </section>
+
+        <!-- MY REQUESTS -->
+        <section class="dashboard-panel" id="requestsSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>My Borrowing Requests</h2>
+              <p>Track the status of your book requests.</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Book</th>
+                  <th>Requested On</th>
+                  <th>Status</th>
+                  <th>Decision Note</th>
+                </tr>
+              </thead>
+              <tbody id="requestsTable">
+                <tr><td colspan="4">Loading requests...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- MY LOANS -->
+        <section class="dashboard-panel" id="loansSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>My Borrowed Books</h2>
+              <p>Keep track of your active and returned books.</p>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Book</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="loansTable">
+                <tr><td colspan="5">Loading loans...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- RECOMMENDATIONS -->
+        <section class="dashboard-panel" id="recommendationsSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>Recommended For You</h2>
+              <p>Discover books based on your reading interests.</p>
+            </div>
+          </div>
+
+          <div id="recommendationContent">
+            <p class="loading-message">
+              Recommendation integration will be added here.
+            </p>
+          </div>
+
+        </section>
+
+        <!-- GRAPH RECOMMENDATIONS -->
+        <section class="dashboard-panel" id="graphRecommendationsSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>Graph-Based Recommendations</h2>
+              <p>Explore connections between books and reading interests.</p>
+            </div>
+          </div>
+
+          <div id="graphRecommendationContent">
+            <p class="loading-message">
+              Graph recommendation integration will be added here.
+            </p>
+          </div>
+
+        </section>
+
+        <!-- PROFILE -->
+        <section class="dashboard-panel" id="profileSection" hidden>
+
+          <div class="panel-heading">
+            <div>
+              <h2>My Profile</h2>
+              <p>Your registered student account information.</p>
+            </div>
+          </div>
+
+          <div class="profile-card">
+
+            <div class="profile-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+
+            <div class="profile-details">
+
+              <div>
+                <span>Full Name</span>
+                <strong id="profileName">Loading...</strong>
+              </div>
+
+              <div>
+                <span>Email Address</span>
+                <strong id="profileEmail">Loading...</strong>
+              </div>
+
+              <div>
+                <span>Account Role</span>
+                <strong id="profileRole">Student</strong>
+              </div>
+
+              <div>
+                <span>Member Since</span>
+                <strong id="profileJoined">—</strong>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <div class="dashboard-message"
+          id="dashboardMessage"
+          role="status"
+          aria-live="polite">
+        </div>
+
+      </div>
+
+      <footer class="dashboard-footer">
+        <p>© 2026 SMART LIB. All rights reserved.</p>
+        <p>Making library management smarter.</p>
+      </footer>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

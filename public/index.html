@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Smart Lib is a modern library management system for managing books, borrowing, returns, and library resources efficiently.">
+
+    <title>Smart Lib | Library Management System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <a href="#home" class="logo" aria-label="Smart Lib Home">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Smart Lib</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="#home" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+            </nav>
+
+            <div class="header-actions">
+                <label class="theme-select-wrap" for="themeSelect">
+                    <i class="fa-solid fa-palette" aria-hidden="true"></i>
+                    <select id="themeSelect" class="theme-select" aria-label="Choose website theme">
+                        <option value="ocean">Ocean Light</option>
+                        <option value="emerald">Emerald Dark</option>
+                        <option value="dark">Midnight Black</option>
+                    </select>
+                </label>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    title="Switch to dark mode"
+                >
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <a href="#" class="login-btn" id="loginBtn"
+                   aria-haspopup="dialog" aria-controls="authModal">
+                    <i class="fa-regular fa-user"></i>
+                    Login
+                </a>
+
+                <button
+                    class="login-btn admin-login-btn"
+                    id="adminLoginBtn"
+                    type="button"
+                    aria-haspopup="dialog"
+                    aria-controls="authModal"
+                >
+                    <i class="fa-solid fa-user-shield"></i>
+                    Admin Login
+                </button>
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="navLinks"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="section-label">LIBRARY MANAGEMENT SYSTEM</p>
+
+                    <h1>
+                        Smarter Library
+                        <br>
+                        Management
+                        <span>Better Learning</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Discover, manage, and access library resources effortlessly
+                        with a secure and intelligent platform designed for modern
+                        educational institutions.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" id="heroGetStartedBtn"
+                           aria-haspopup="dialog" aria-controls="authModal">
+                            <i class="fa-regular fa-user"></i>
+                            Get Started
+                        </a>
+
+                        <a href="#features" class="btn btn-secondary">
+                            <i class="fa-solid fa-book-open"></i>
+                            Explore Features
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img
+                        src="/smart-lib-library.png"
+                        alt="Smart Lib modern library with students choosing and reading books"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="container quote-wrapper">
+                <div class="quote-line"></div>
+                <blockquote>
+                    "A library is not just a collection of books,
+                    but a gateway to knowledge."
+                </blockquote>
+                <div class="quote-line"></div>
+            </div>
+        </section>
+
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">OUR FEATURES</p>
+                    <h2>Everything You Need to Manage Your Library</h2>
+                    <p class="section-description">
+                        Powerful tools that simplify library operations
+                        and improve the learning experience.
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <h3>Book Management</h3>
+                        <p>
+                            Easily add, update, organize, and manage books,
+                            authors, categories, and availability from one
+                            centralized system.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-regular fa-calendar-check"></i>
+                        </div>
+                        <h3>Easy Borrow &amp; Return</h3>
+                        <p>
+                            Simplify book issuance and returns while automatically
+                            tracking borrowing records, due dates, fines, and
+                            availability in real time.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-regular fa-lightbulb"></i>
+                        </div>
+                        <h3>Smart Recommendations</h3>
+                        <p>
+                            Discover relevant books through personalized
+                            recommendations powered by borrowing history
+                            and collaborative filtering.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-column"></i>
+                        </div>
+                        <h3>Real-Time Analytics</h3>
+                        <p>
+                            Monitor book popularity, borrowing trends, overdue
+                            records, and overall library performance through
+                            meaningful analytics.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="container about-grid">
+                <div class="about-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1200&q=85"
+                        alt="Books arranged in a library"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="about-content">
+                    <p class="section-label">ABOUT THE PLATFORM</p>
+                    <h2>Modernizing Institutional Library Operations</h2>
+
+                    <p>
+                        Smart Lib is a comprehensive library management system
+                        designed to simplify and modernize library operations.
+                        It enables administrators and librarians to manage books,
+                        members, borrowing records, returns, and fines through
+                        a centralized platform.
+                    </p>
+
+                    <p>
+                        Real-time data and analytics help institutions understand
+                        borrowing patterns, improve resource utilization, and
+                        provide students with better access to knowledge.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="section-label">WHY SMART LIB</p>
+                    <h2>Built for Smarter Library Management</h2>
+                    <p class="section-description">
+                        A secure and efficient platform designed to make everyday
+                        library operations simpler and more intelligent.
+                    </p>
+                </div>
+
+                <div class="services-grid">
+                    <article class="service-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <h3>Secure Access</h3>
+                            <p>
+                                Role-based access control ensures administrators,
+                                librarians, and students receive appropriate
+                                access to system resources.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="service-box">
+                        <i class="fa-solid fa-gears"></i>
+                        <div>
+                            <h3>Efficient Operations</h3>
+                            <p>
+                                Automate book issuance, returns, inventory
+                                tracking, and fine calculation to reduce
+                                repetitive administrative work.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="service-box">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <div>
+                            <h3>Data-Driven Insights</h3>
+                            <p>
+                                Analyze borrowing trends, book popularity,
+                                overdue records, and resource utilization
+                                through meaningful statistics.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#home" class="logo footer-logo">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Smart Lib</span>
+                </a>
+                <p>
+                    A modern library management system designed to make
+                    library operations smarter, faster, and more accessible.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Services</h4>
+                <a href="#features">Book Management</a>
+                <a href="#features">Borrow &amp; Return</a>
+                <a href="#features">Recommendations</a>
+                <a href="#features">Analytics</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact / Support</h4>
+                <p>
+                    <i class="fa-regular fa-envelope"></i>
+                    Contact information coming soon
+                </p>
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Gwalior, Madhya Pradesh, India
+                </p>
+            </div>
+
+            <div class="footer-message">
+                <p>Better Libraries.<br>Brighter Futures.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="LinkedIn" rel="noopener noreferrer">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" aria-label="GitHub" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                © <span id="currentYear"></span> Smart Lib.
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <div
+        class="auth-modal"
+        id="authModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="authTitle"
+        aria-hidden="true"
+    >
+        <div class="auth-backdrop" data-close-auth></div>
+
+        <div class="auth-card">
+            <button
+                class="auth-close"
+                id="closeAuthBtn"
+                type="button"
+                aria-label="Close login window"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <a href="#home" class="logo auth-logo">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Smart Lib</span>
+            </a>
+
+            <div class="auth-tabs" id="authTabs"
+                 role="tablist" aria-label="Account options">
+                <button
+                    class="auth-tab active"
+                    id="loginTab"
+                    type="button"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="loginForm"
+                    data-auth-tab="login"
+                >
+                    Login
+                </button>
+
+                <button
+                    class="auth-tab"
+                    id="registerTab"
+                    type="button"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="registerForm"
+                    data-auth-tab="register"
+                >
+                    Create Account
+                </button>
+            </div>
+
+            <div class="auth-heading">
+                <h2 id="authTitle">Welcome Back</h2>
+                <p id="authSubtitle">Log in to continue to your library.</p>
+            </div>
+
+            <form id="loginForm" class="auth-form" autocomplete="on">
+                <label for="loginEmail">Email Address</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input
+                        id="loginEmail"
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <label for="loginPassword">Password</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-solid fa-lock"></i>
+                    <input
+                        id="loginPassword"
+                        name="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+                    <button
+                        class="password-toggle"
+                        type="button"
+                        data-toggle-password="loginPassword"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+
+                <button class="auth-submit" id="loginSubmitBtn" type="submit">
+                    Login
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch-text" id="loginRegisterSwitch">
+                    New to Smart Lib?
+                    <button type="button" data-switch-auth="register">
+                        Create an account
+                    </button>
+                </p>
+            </form>
+
+            <form id="registerForm" class="auth-form" autocomplete="on" hidden>
+                <label for="registerName">Full Name</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-regular fa-user"></i>
+                    <input
+                        id="registerName"
+                        name="name"
+                        type="text"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        minlength="2"
+                        required
+                    >
+                </div>
+
+                <label for="registerEmail">Email Address</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input
+                        id="registerEmail"
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <label for="registerPassword">Create Password</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-solid fa-lock"></i>
+                    <input
+                        id="registerPassword"
+                        name="password"
+                        type="password"
+                        placeholder="At least 8 characters"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                    <button
+                        class="password-toggle"
+                        type="button"
+                        data-toggle-password="registerPassword"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="auth-input-wrap">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <input
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        type="password"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+
+                <button class="auth-submit" type="submit">
+                    Create Account
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <p class="auth-switch-text">
+                    Already have an account?
+                    <button type="button" data-switch-auth="login">Login</button>
+                </p>
+            </form>
+
+            <p class="auth-message" id="authMessage"
+               role="status" aria-live="polite"></p>
+
+            <p class="auth-note">
+                <i class="fa-solid fa-shield-halved"></i>
+                Your library journey starts here.
+            </p>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

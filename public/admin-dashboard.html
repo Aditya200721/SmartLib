@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b5d">
+
+  <title>Admin Dashboard | SMART LIB</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin-dashboard.css">
+
+  <script src="/js/admin-dashboard.js" defer></script>
+</head>
+
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+
+      <div class="sidebar-brand">
+        <div class="brand-icon">SL</div>
+        <div class="brand-text">
+          <h2>SMART LIB</h2>
+          <span>Administration</span>
+        </div>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="profile-avatar">A</div>
+        <div>
+          <strong>Administrator</strong>
+          <span>Library Manager</span>
+        </div>
+      </div>
+
+      <nav class="dashboard-navigation">
+
+        <p class="nav-heading">MAIN MENU</p>
+
+        <button class="dashboard-nav-btn active"
+                data-section="overviewSection">
+          <span class="nav-icon">▦</span>
+          <span>Overview</span>
+        </button>
+
+        <button class="dashboard-nav-btn"
+                data-section="booksSection">
+          <span class="nav-icon">▤</span>
+          <span>Book Management</span>
+        </button>
+
+        <button class="dashboard-nav-btn"
+                data-section="categoriesSection">
+          <span class="nav-icon">▣</span>
+          <span>Categories</span>
+        </button>
+
+        <p class="nav-heading">LIBRARY OPERATIONS</p>
+
+        <button class="dashboard-nav-btn"
+                data-section="requestsSection">
+          <span class="nav-icon">⇄</span>
+          <span>Borrow Requests</span>
+          <span class="nav-count" id="pendingRequestBadge">0</span>
+        </button>
+
+        <button class="dashboard-nav-btn"
+                data-section="loansSection">
+          <span class="nav-icon">▥</span>
+          <span>Loan Management</span>
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="theme-control">
+          <label for="themeSelect">Appearance</label>
+          <select id="themeSelect">
+            <option value="ocean">Ocean</option>
+            <option value="emerald">Emerald</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+          <span>↪</span>
+          Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+      <!-- TOPBAR -->
+      <header class="dashboard-topbar">
+
+        <div class="topbar-left">
+          <button class="sidebar-toggle"
+                  id="sidebarToggle"
+                  aria-label="Toggle sidebar">
+            ☰
+          </button>
+
+          <div>
+            <span class="topbar-label">SMART LIB / ADMIN</span>
+            <h1 id="pageTitle">Overview</h1>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <span class="admin-status">
+            <span class="status-dot"></span>
+            Administrator
+          </span>
+        </div>
+
+      </header>
+
+
+      <!-- MESSAGE AREA -->
+      <div class="dashboard-message" id="dashboardMessage"
+           role="status" aria-live="polite"></div>
+
+
+      <!-- ================= OVERVIEW ================= -->
+      <section class="dashboard-panel active"
+               id="overviewSection">
+
+        <div class="welcome-section">
+          <div>
+            <p class="section-eyebrow">ADMINISTRATION</p>
+            <h2>Library Overview</h2>
+            <p>Monitor and manage your library operations.</p>
+          </div>
+
+          <button class="refresh-btn" id="refreshDashboardBtn">
+            ↻ Refresh
+          </button>
+        </div>
+
+
+        <!-- STATISTICS -->
+        <div class="admin-stats-grid">
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Total Students</span>
+              <span class="stat-icon students-icon">♙</span>
+            </div>
+            <h3 id="totalStudents">--</h3>
+            <p>Registered students</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Total Books</span>
+              <span class="stat-icon books-icon">▤</span>
+            </div>
+            <h3 id="totalBooks">--</h3>
+            <p>Active book records</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Categories</span>
+              <span class="stat-icon categories-icon">▣</span>
+            </div>
+            <h3 id="totalCategories">--</h3>
+            <p>Book categories</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Pending Requests</span>
+              <span class="stat-icon requests-icon">⇄</span>
+            </div>
+            <h3 id="pendingRequests">--</h3>
+            <p>Awaiting review</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Active Loans</span>
+              <span class="stat-icon loans-icon">▥</span>
+            </div>
+            <h3 id="activeLoans">--</h3>
+            <p>Currently borrowed</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <div class="stat-card-top">
+              <span>Overdue Loans</span>
+              <span class="stat-icon overdue-icon">!</span>
+            </div>
+            <h3 id="overdueLoans">--</h3>
+            <p>Past due date</p>
+          </article>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+        <div class="admin-content-card">
+
+          <div class="panel-heading">
+            <div>
+              <h3>Quick Actions</h3>
+              <p>Access frequently used administration tools.</p>
+            </div>
+          </div>
+
+          <div class="quick-actions-grid">
+
+            <button class="quick-action-btn"
+                    data-open-section="booksSection">
+              <span class="quick-action-icon">＋</span>
+              <span>
+                <strong>Manage Books</strong>
+                <small>Add or update library books</small>
+              </span>
+            </button>
+
+            <button class="quick-action-btn"
+                    data-open-section="categoriesSection">
+              <span class="quick-action-icon">▣</span>
+              <span>
+                <strong>Manage Categories</strong>
+                <small>Organize book categories</small>
+              </span>
+            </button>
+
+            <button class="quick-action-btn"
+                    data-open-section="requestsSection">
+              <span class="quick-action-icon">⇄</span>
+              <span>
+                <strong>Review Requests</strong>
+                <small>Approve or reject requests</small>
+              </span>
+            </button>
+
+            <button class="quick-action-btn"
+                    data-open-section="loansSection">
+              <span class="quick-action-icon">▥</span>
+              <span>
+                <strong>Manage Loans</strong>
+                <small>Track borrowed books</small>
+              </span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= BOOK MANAGEMENT ================= -->
+      <section class="dashboard-panel" id="booksSection">
+
+        <div class="section-toolbar">
+
+          <div>
+            <p class="section-eyebrow">COLLECTION</p>
+            <h2>Book Management</h2>
+            <p>Manage your library collection.</p>
+          </div>
+
+          <button class="primary-btn" id="addBookBtn">
+            ＋ Add New Book
+          </button>
+
+        </div>
+
+
+        <div class="admin-content-card">
+
+          <div class="table-toolbar">
+
+            <div class="search-control">
+              <input type="search"
+                     id="bookSearch"
+                     placeholder="Search title, author or ISBN...">
+            </div>
+
+            <label class="archive-filter">
+              <input type="checkbox" id="includeArchived">
+              Show archived books
+            </label>
+
+          </div>
+
+
+          <div class="table-responsive">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Book</th>
+                  <th>ISBN</th>
+                  <th>Category</th>
+                  <th>Total Copies</th>
+                  <th>Available</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="booksTableBody">
+                <tr>
+                  <td colspan="7" class="table-placeholder">
+                    Loading books...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <div class="pagination-container" id="booksPagination"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= CATEGORIES ================= -->
+      <section class="dashboard-panel" id="categoriesSection">
+
+        <div class="section-toolbar">
+
+          <div>
+            <p class="section-eyebrow">ORGANIZATION</p>
+            <h2>Categories</h2>
+            <p>Organize books into categories.</p>
+          </div>
+
+          <button class="primary-btn" id="addCategoryBtn">
+            ＋ Add Category
+          </button>
+
+        </div>
+
+
+        <div class="admin-content-card">
+
+          <div class="table-responsive">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Category Name</th>
+                  <th>Description</th>
+                  <th>Books</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="categoriesTableBody">
+                <tr>
+                  <td colspan="4" class="table-placeholder">
+                    Loading categories...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= BORROW REQUESTS ================= -->
+      <section class="dashboard-panel" id="requestsSection">
+
+        <div class="section-toolbar">
+
+          <div>
+            <p class="section-eyebrow">BORROWING</p>
+            <h2>Borrow Requests</h2>
+            <p>Review student borrowing requests.</p>
+          </div>
+
+        </div>
+
+
+        <div class="admin-content-card">
+
+          <div class="table-toolbar">
+
+            <label class="filter-control">
+              <span>Request Status</span>
+
+              <select id="requestStatusFilter">
+                <option value="">All Requests</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+
+            </label>
+
+          </div>
+
+
+          <div class="table-responsive">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Book</th>
+                  <th>Requested On</th>
+                  <th>Status</th>
+                  <th>Decision Note</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="requestsTableBody">
+                <tr>
+                  <td colspan="6" class="table-placeholder">
+                    Loading requests...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= LOANS ================= -->
+      <section class="dashboard-panel" id="loansSection">
+
+        <div class="section-toolbar">
+
+          <div>
+            <p class="section-eyebrow">CIRCULATION</p>
+            <h2>Loan Management</h2>
+            <p>Track issued and returned books.</p>
+          </div>
+
+        </div>
+
+
+        <div class="admin-content-card">
+
+          <div class="table-toolbar">
+
+            <label class="filter-control">
+              <span>Loan Status</span>
+
+              <select id="loanStatusFilter">
+                <option value="">All Loans</option>
+                <option value="active">Active</option>
+                <option value="returned">Returned</option>
+              </select>
+
+            </label>
+
+          </div>
+
+
+          <div class="table-responsive">
+
+            <table class="admin-table">
+
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Book</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Return Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="loansTableBody">
+                <tr>
+                  <td colspan="7" class="table-placeholder">
+                    Loading loans...
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- ================= BOOK MODAL ================= -->
+  <div class="admin-modal" id="bookModal"
+       role="dialog" aria-modal="true"
+       aria-labelledby="bookModalTitle"
+       hidden>
+
+    <div class="modal-backdrop" data-close-modal="bookModal"></div>
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <p class="section-eyebrow">BOOK COLLECTION</p>
+          <h2 id="bookModalTitle">Add New Book</h2>
+        </div>
+
+        <button class="modal-close"
+                data-close-modal="bookModal"
+                aria-label="Close">×</button>
+      </div>
+
+      <form id="bookForm">
+
+        <input type="hidden" id="bookId">
+
+        <div class="form-group">
+          <label for="bookTitle">Book Title *</label>
+          <input type="text" id="bookTitle" required maxlength="200">
+        </div>
+
+        <div class="form-group">
+          <label for="bookAuthor">Author *</label>
+          <input type="text" id="bookAuthor" required maxlength="150">
+        </div>
+
+        <div class="form-group">
+          <label for="bookIsbn">ISBN *</label>
+          <input type="text" id="bookIsbn" required maxlength="30">
+        </div>
+
+        <div class="form-group">
+          <label for="bookCategory">Category *</label>
+          <select id="bookCategory" required>
+            <option value="">Select Category</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bookTotalCopies">Total Copies *</label>
+          <input type="number" id="bookTotalCopies"
+                 min="1" step="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="bookDescription">Description</label>
+          <textarea id="bookDescription" rows="3"
+                    maxlength="2000"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn"
+                  data-close-modal="bookModal">
+            Cancel
+          </button>
+
+          <button type="submit" class="primary-btn"
+                  id="saveBookBtn">
+            Save Book
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= CATEGORY MODAL ================= -->
+  <div class="admin-modal" id="categoryModal"
+       role="dialog" aria-modal="true"
+       aria-labelledby="categoryModalTitle"
+       hidden>
+
+    <div class="modal-backdrop" data-close-modal="categoryModal"></div>
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <p class="section-eyebrow">BOOK ORGANIZATION</p>
+          <h2 id="categoryModalTitle">Add Category</h2>
+        </div>
+
+        <button class="modal-close"
+                data-close-modal="categoryModal"
+                aria-label="Close">×</button>
+      </div>
+
+      <form id="categoryForm">
+
+        <input type="hidden" id="categoryId">
+
+        <div class="form-group">
+          <label for="categoryName">Category Name *</label>
+          <input type="text" id="categoryName"
+                 required maxlength="100">
+        </div>
+
+        <div class="form-group">
+          <label for="categoryDescription">Description</label>
+          <textarea id="categoryDescription"
+                    rows="4" maxlength="1000"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn"
+                  data-close-modal="categoryModal">
+            Cancel
+          </button>
+
+          <button type="submit" class="primary-btn"
+                  id="saveCategoryBtn">
+            Save Category
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= REQUEST REVIEW MODAL ================= -->
+  <div class="admin-modal" id="requestModal"
+       role="dialog" aria-modal="true"
+       aria-labelledby="requestModalTitle"
+       hidden>
+
+    <div class="modal-backdrop" data-close-modal="requestModal"></div>
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div>
+          <p class="section-eyebrow">REQUEST REVIEW</p>
+          <h2 id="requestModalTitle">Review Request</h2>
+        </div>
+
+        <button class="modal-close"
+                data-close-modal="requestModal"
+                aria-label="Close">×</button>
+      </div>
+
+      <form id="requestReviewForm">
+
+        <input type="hidden" id="reviewRequestId">
+        <input type="hidden" id="reviewDecision">
+
+        <div class="review-request-details" id="reviewRequestDetails"></div>
+
+        <div class="form-group">
+          <label for="decisionNote">Decision Note</label>
+          <textarea id="decisionNote"
+                    rows="3" maxlength="500"
+                    placeholder="Optional note for the student..."></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn"
+                  data-close-modal="requestModal">
+            Cancel
+          </button>
+
+          <button type="submit" class="primary-btn"
+                  id="confirmReviewBtn">
+            Confirm Decision
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
